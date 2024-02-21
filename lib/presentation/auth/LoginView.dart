@@ -1,5 +1,8 @@
 import 'package:expense_calc/components/constants/AppFonts.dart';
 import 'package:expense_calc/components/coreComponents/TextView.dart';
+import 'package:expense_calc/presentation/auth/ForgotPasswordView.dart';
+import 'package:expense_calc/presentation/auth/SignupView.dart';
+import 'package:expense_calc/utils/AppExtensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/constants/AppStrings.dart';
@@ -31,21 +34,25 @@ class _LoginViewState extends State<LoginView> {
                 controller: TextEditingController()),
             EditText(
                 hint: AppStrings.enterYourPassword,
-                controller: TextEditingController()),
+                controller: TextEditingController(),
+              isPassword: true,
+            ),
             const AppButton(
               margin: EdgeInsets.symmetric(vertical: AppFonts.s40),
               label: AppStrings.login,
               labelStyle: TextStyles.medium14White,
             ),
-
-            const Row(
+             Row(
               children: [
-                TextView(text: AppStrings.ddntHaveAccount, textStyle: TextStyles.medium14Black,),
-                TextView(text: AppStrings.createNew, textStyle: TextStyles.semiBold14Primary,)
+                const TextView(text: AppStrings.ddntHaveAccount, textStyle: TextStyles.medium14Black,),
+                TextView(
+                  onTap: ()=>  context.pushNavigator(const SignupView()),
+                  text: AppStrings.createNew, textStyle: TextStyles.semiBold14Primary,)
               ],
             ),
-
-            const TextView(text: AppStrings.forgotPassword,
+             TextView(
+               onTap: ()=> context.pushNavigator(const ForgotPasswordView()),
+               text: AppStrings.forgotPassword,
             textStyle: TextStyles.semiBold14Primary,
             margin: EdgeInsets.only(top: AppFonts.s10),
             )

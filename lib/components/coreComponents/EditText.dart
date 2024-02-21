@@ -12,11 +12,12 @@ class EditText extends StatefulWidget {
   final Color? borderColor;
   final Color? filledColor;
   final bool isFilled;
+  final bool isPassword;
   final String? hint;
   final String? error;
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
-  const EditText({super.key, required this.controller, this.readOnly, this.padding, this.margin, this.radius, this.borderColor, this.filledColor, this.isFilled = true, this.hint, this.hintStyle, this.textStyle, this.error});
+  const EditText({super.key, required this.controller, this.readOnly, this.padding, this.margin, this.radius, this.borderColor, this.filledColor, this.isFilled = true, this.hint, this.hintStyle, this.textStyle, this.error,  this.isPassword = false});
 
   @override
   State<EditText> createState() => _EditTextState();
@@ -43,6 +44,7 @@ class _EditTextState extends State<EditText> {
                 ? null
                 : widget.error
         ),
+        obscureText: widget.isPassword,
         readOnly: widget.readOnly ?? false,
         controller: widget.controller,
       ),

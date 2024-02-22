@@ -26,7 +26,8 @@ class FailureMessageDailog extends StatelessWidget {
             onTap: dismiss,
             url:
             // AppIcons.cancelCross,
-            AppIcons.remove,
+            // AppIcons.remove,
+            '',
             size: AppFonts.s20,
           ),
         ),
@@ -42,7 +43,8 @@ class FailureMessageDailog extends StatelessWidget {
     return  Column(
       children: [
         ImageView(url:
-        AppIcons.remove,
+        // AppIcons.remove,
+        '',
         // AppIcons.help,
           size: AppFonts.s40 * 2,),
         // TextView(text: AppStrings.upgradeRequired, textStyle: TextStyles.semiBold20Black,

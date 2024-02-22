@@ -1,4 +1,5 @@
 class AppStrings {
+  static const String appName = 'Expense Calculator';
   static const String login = 'Login';
   static const String log_in_toYourAccount = 'Log in\nto your account';
   static const String createAccount = 'Create account';

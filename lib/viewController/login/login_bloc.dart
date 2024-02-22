@@ -11,6 +11,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final repo = AuthRepoImplementation();
   LoginBloc() : super(LoginInitial()) {
+    on<CheckAuthEvent>(_checkAuth);
     on<DoLoginEvent>(_doLoginApi);
   }
 
@@ -29,5 +30,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     } catch (e) {
       emit(LoginError(error: e.toString()));}
+  }
+
+  FutureOr<void> _checkAuth(CheckAuthEvent event, Emitter<LoginState> emit) async{
+    await repo.isAuthenticated().then((value){
+      emit(LoginIsAuthenticated(state: value));
+    });
   }
 }

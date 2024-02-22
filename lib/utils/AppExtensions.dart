@@ -45,3 +45,21 @@ extension AppStateExtn on BuildContext{
   bool get isPortraitMode =>
       MediaQuery.of(this).orientation == Orientation.portrait;
 }
+
+
+
+extension StringExtn on String{
+  // password condition check....
+  bool get isPassword => length > 6 && length< 25;
+
+  bool isEquals(String value) => compareTo(value) == 0;
+
+  bool get isEmail => _hasMatch(this,
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+}
+
+
+
+bool _hasMatch(String? value, String pattern) {
+return (value == null) ? false : RegExp(pattern).hasMatch(value);
+}

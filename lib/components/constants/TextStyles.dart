@@ -32,6 +32,7 @@ class TextStyles{
   static const TextStyle semiBold12P_Green = TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s12, fontFamily: Family.semiBold);
   static const TextStyle semiBold14Primary = TextStyle(color: AppColors.primaryColor, fontSize: AppFonts.s14, fontFamily: Family.semiBold);
   static const TextStyle semiBold16Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s16, fontFamily: Family.semiBold);
+  static const TextStyle semiBold20Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s20, fontFamily: Family.semiBold);
   static const TextStyle semiBold16P_Green= TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s16, fontFamily: Family.semiBold);
   static const TextStyle semiBold30P_Green = TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s30, fontFamily: Family.semiBold);
 

@@ -272,7 +272,7 @@ class EditTextTheme {
     // contentPadding: ,
     // counterStyle: ,
     disabledBorder: disableBorder,
-    // errorBorder: ,
+    errorBorder: errorBorder,
     // errorMaxLines: ,
     // errorStyle: ,
     // fillColor: AppColors.grey10,
@@ -280,7 +280,7 @@ class EditTextTheme {
     // floatingLabelAlignment: ,
     // floatingLabelBehavior: ,
     // floatingLabelStyle: ,
-    // focusedErrorBorder: ,
+    focusedErrorBorder: setErrorBorder,
     // helperMaxLines: ,
     // helperStyle: ,
     // hintFadeDuration: ,
@@ -306,9 +306,15 @@ class EditTextTheme {
 
   static InputBorder get enabledBorder => setBorder;
 
+  static InputBorder get errorBorder => setErrorBorder;
+
   static InputBorder get setBorder => OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppFonts.s10),
       borderSide: const BorderSide(color: AppColors.primaryColor, width: 2));
+
+  static InputBorder get setErrorBorder => OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppFonts.s10),
+      borderSide: const BorderSide(color: AppColors.red, width: 2));
 }
 
 

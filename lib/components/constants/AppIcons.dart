@@ -3,8 +3,9 @@ const String _iconPath = 'assets/icon/';
 
 class AppIcons{
   static const String backButton = '${_iconPath}back.png';
-  static const String male = '${_iconPath}male.png';
-  static const String female = '${_iconPath}female.png';
+  static const String home = '${_iconPath}home.png';
+  static const String wallet = '${_iconPath}wallet.png';
+  static const String note = '${_iconPath}note.png';
   static const String user = '${_iconPath}user.png';
-  static const String remove = '${_iconPath}trash.png';
+
 }

@@ -3,6 +3,7 @@ import 'package:expense_calc/components/coreComponents/TextView.dart';
 import 'package:expense_calc/components/widgets/dialog/FailureMessageDialog.dart';
 import 'package:expense_calc/presentation/auth/ForgotPasswordView.dart';
 import 'package:expense_calc/presentation/auth/SignupView.dart';
+import 'package:expense_calc/presentation/bottomTabs/BottomTabs.dart';
 import 'package:expense_calc/utils/AppExtensions.dart';
 import 'package:expense_calc/viewController/login/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
         minimum: const EdgeInsets.symmetric(horizontal: AppFonts.s20),
         child: loginForm(
           onLogin: (){
-            print('logged in successfully');
+            context.pushAndClearNavigator(const BottomTabs());
           },
         ),
       ),
@@ -63,7 +64,10 @@ class _LoginViewState extends State<LoginView> {
           onLogin();
         }else if (state is LoginError) {
           context.stopLoader;
-          context.openDialog(FailureMessageDailog(message: state.error));
+          context.openDialog(FailureMessageDailog(
+              message: state.error,
+            onTap: () => context.stopLoader,
+          ));
         }else if(state is LoginFormValidationError){
           context.stopLoader;
         }

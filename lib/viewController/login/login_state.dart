@@ -13,6 +13,14 @@ class LoginLoading extends LoginState {
   List<Object> get props => [];
 }
 
+class LoginIsAuthenticated extends LoginState {
+  final bool state;
+
+  const LoginIsAuthenticated({required this.state});
+  @override
+  List<Object> get props => [state];
+}
+
 class LoginSuccess extends LoginState {
   const LoginSuccess();
   @override

@@ -48,7 +48,10 @@ class _SignupViewState extends State<SignupView> {
           onSuccess();
         }else if(state is SignUpFailure){
           context.stopLoader;
-          context.openDialog(FailureMessageDailog(message: state.error));
+          context.openDialog(FailureMessageDailog(
+              message: state.error,
+            onTap: () => context.stopLoader,
+          ));
         }else if (state is SignUpFormValidationError){
           context.stopLoader;
         }

@@ -24,7 +24,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       final password = event.password.trim();
       final confirmPassword = event.confirmPassword.trim();
       if(email.isEmail && password.isPassword && confirmPassword.isEquals(password)){
-        await repo.authenticate(email: email, password: password).then((value){
+        await repo.register(email: email, password: password).then((value){
           emit(const SignUpSuccess());
         });
       }else{

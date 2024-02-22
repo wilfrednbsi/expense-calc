@@ -1,4 +1,5 @@
 import 'package:expense_calc/viewController/appTheme/app_theme_bloc.dart';
+import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
 import 'package:expense_calc/viewController/login/login_bloc.dart';
 import 'package:expense_calc/viewController/signup/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,20 @@ import 'presentation/launcher/SplashView.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 
-void main() {
+import 'services/firebaseServices/FirebaseService.dart';
+import 'services/localData/SharedPref.dart';
+
+void main() async{
+  await initConfig();
   runApp(const MyApp());
+}
+
+// init app configuration ....
+Future<void> initConfig() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FirebaseService.init();
+  await SharedPref.config();
+  return;
 }
 
 class MyApp extends StatelessWidget {
@@ -35,8 +48,9 @@ class MyApp extends StatelessWidget {
 
 List<SingleChildWidget> providers = [
   BlocProvider(create: (context) => AppThemeBloc()),
-  BlocProvider(create: (context) => LoginBloc()),
+  BlocProvider(create: (context) => LoginBloc()..add(const CheckAuthEvent())),
   BlocProvider(create: (context) => SignUpBloc()),
+  BlocProvider(create: (context) => BottomTabsBloc()),
 ];
 
 

@@ -8,13 +8,13 @@ appLoader(BuildContext context) {
       context: context,
       // useSafeArea: true,
       barrierDismissible: false,
-      builder: (_) => Column(
+      builder: (_) => const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: 50,
               width: 50,
-              child: CircularProgressIndicator(color: AppColors.primaryGreen,)),
+              child: CircularProgressIndicator(color: AppColors.primaryColor,)),
         ],
       )
   );

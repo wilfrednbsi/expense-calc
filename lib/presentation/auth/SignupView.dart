@@ -1,5 +1,8 @@
+import 'package:expense_calc/components/widgets/dialog/FailureMessageDialog.dart';
 import 'package:expense_calc/utils/AppExtensions.dart';
+import 'package:expense_calc/viewController/signup/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/constants/AppFonts.dart';
 import '../../components/constants/AppStrings.dart';
@@ -16,48 +19,113 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
+  final confPasswordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: AppFonts.s20),
-        child: Column(
+        child: form(
+          onSuccess: (){
+            print('register successfully');
+            context.pop();
+          }
+        ),
+      ),
+    );
+  }
+
+
+  Widget form({required Function() onSuccess}) {
+    return BlocConsumer<SignUpBloc, SignUpState>(
+      listener: (context, state) {
+        if(state is SignUpLoading){
+          context.load;
+        }else if(state is SignUpSuccess){
+          context.stopLoader;
+          onSuccess();
+        }else if(state is SignUpFailure){
+          context.stopLoader;
+          context.openDialog(FailureMessageDailog(message: state.error));
+        }else if (state is SignUpFormValidationError){
+          context.stopLoader;
+        }
+      },
+      builder: (context, state) {
+        return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextView(text: AppStrings.createAccount, textStyle: TextStyles.semiBold16Black,),
-            EditText(
-                margin: const EdgeInsets.symmetric(vertical: AppFonts.s20),
-                hint: AppStrings.enterYourEmailAddress,
-                controller: TextEditingController()
+            const TextView(text: AppStrings.createAccount,
+              textStyle: TextStyles.semiBold16Black,),
+            BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) {
+                var error = '';
+                if(state is SignUpFormValidationError){
+                  error = state.email;
+                }
+                return EditText(
+                    margin: const EdgeInsets.symmetric(vertical: AppFonts.s20),
+                    hint: AppStrings.enterYourEmailAddress,
+                    controller: emailCtrl,
+                  error: error,
+                );
+              },
             ),
-            EditText(
-                hint: AppStrings.password,
-                controller: TextEditingController(),
-              isPassword: true,
+            BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) {
+                var error = '';
+                if(state is SignUpFormValidationError){
+                  error = state.password;
+                }
+                return EditText(
+                  hint: AppStrings.password,
+                  controller: passwordCtrl,
+                  isPassword: true,
+                  error: error,
+                );
+              },
             ),
-            EditText(
-                hint: AppStrings.confirmPassword,
-                controller: TextEditingController(),
-              isPassword: true,
-              margin: const EdgeInsets.only(top: AppFonts.s20),
+            BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) {
+                var error = '';
+                if(state is SignUpFormValidationError){
+                  error = state.confirmPassword;
+                }
+                return EditText(
+                  hint: AppStrings.confirmPassword,
+                  controller: confPasswordCtrl,
+                  isPassword: true,
+                  margin: const EdgeInsets.only(top: AppFonts.s20),
+                  error: error,
+                );
+              },
             ),
-            const AppButton(
-              margin: EdgeInsets.symmetric(vertical: AppFonts.s40),
+             AppButton(
+               onTap: ()=> context.read<SignUpBloc>().add(SignupRegisterEvent(
+                   email: emailCtrl.text,
+                   password: passwordCtrl.text,
+                   confirmPassword: confPasswordCtrl.text
+               )),
+              margin: const EdgeInsets.symmetric(vertical: AppFonts.s40),
               label: AppStrings.continuee,
               labelStyle: TextStyles.medium14White,
             ),
-             Row(
+            Row(
               children: [
-                const TextView(text: AppStrings.haveAnAccount, textStyle: TextStyles.medium14Black,),
+                const TextView(text: AppStrings.haveAnAccount,
+                  textStyle: TextStyles.medium14Black,),
                 TextView(
                   onTap: context.pop,
-                  text: AppStrings.login, textStyle: TextStyles.semiBold14Primary,)
+                  text: AppStrings.login,
+                  textStyle: TextStyles.semiBold14Primary,)
               ],
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

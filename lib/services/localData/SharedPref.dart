@@ -1,9 +1,10 @@
 
+import 'package:expense_calc/components/constants/AppStrings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'AppData.dart';
 
-const String _uidKey = 'uidKeyBMICal';
+const String _uidKey = 'uidKey${AppStrings.appName}';
 class SharedPref{
 
     static late SharedPreferences _pref;

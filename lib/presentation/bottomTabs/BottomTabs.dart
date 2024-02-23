@@ -1,4 +1,5 @@
 import 'package:expense_calc/components/constants/constants.dart';
+import 'package:expense_calc/presentation/home/HomeView.dart';
 import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,7 @@ class BottomTabs extends StatefulWidget {
 }
 
 class _BottomTabsState extends State<BottomTabs> {
+  final List<Widget> tabs = [const HomeView(),Container(),Container(),Container()];
   @override
   void initState() {
     // TODO: implement initState
@@ -29,7 +31,9 @@ class _BottomTabsState extends State<BottomTabs> {
       },
       builder: (context, state) {
         return Scaffold(
-          body: Container(),
+          body: SafeArea(
+            child: tabs[state.index],
+          ),
           bottomNavigationBar: BottomNavBar(
             activeIndex: state.index,
             onSelect: (index) =>

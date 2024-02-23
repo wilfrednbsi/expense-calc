@@ -1,3 +1,4 @@
+import 'package:expense_calc/components/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../components/coreComponents/AppDialog.dart';
@@ -62,4 +63,18 @@ extension StringExtn on String{
 
 bool _hasMatch(String? value, String pattern) {
 return (value == null) ? false : RegExp(pattern).hasMatch(value);
+}
+
+
+
+extension TransactionEnumExten on TransactionType{
+  String get getName {
+    String value = '';
+    if(this == TransactionType.fundAdd){
+      value = 'Fund Added!';
+    }else if(this == TransactionType.rent){
+      value = 'Rent';
+    }
+    return value;
+  }
 }

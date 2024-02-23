@@ -13,4 +13,27 @@ class AppStrings {
   static const String createNew = "Create New";
   static const String haveAnAccount = "Have an Account? ";
   static const String forgotPasswordSubtitleDesc = "Enter email address linked with your account, We will send you email to reset your password ";
+  static const String totalBalance = "Total Balance";
+  static const String rupeeUnicode = "₹";
+  static const String addFund = "Add Fund";
+  static const String categories = "Categories";
+  static const String need = "Need";
+  static const String expenses = "Expenses";
+  static const String savings = "Savings";
+  static const String allTransactions = "All Transactions";
+  static const String profile = "Profile";
+  static const String camera = "Camera";
+  static const String gallery = "Gallery";
+  static const String choosePhoto = "Choose Photo";
+  static const String changePassword = "Choose Password";
+  static const String logout = "Logout";
+  static const String fullName = "Full Name";
+  static const String phoneNumber = "Phone Number";
+  static const String emailAddress = "Email Address";
+  static const String settings = "Settings";
+  static const String editProfile = "Edit Profile";
+  static const String update = "Update";
+  static const String enterYourOldPassword = "Enter your old password";
+  static const String enterNewPassword = "Enter new password";
+  static const String change = "Change";
 }

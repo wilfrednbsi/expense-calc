@@ -1,4 +1,6 @@
 
+import 'package:expense_calc/model/ProfileModel.dart';
+
 import '../../localData/AppData.dart';
 import '/utils/AppExtensions.dart';
 
@@ -14,6 +16,9 @@ abstract class AuthRepo {
   Future<bool> isAuthenticated();
 
   Future<String> register({required String email, required String password});
+
+  Future<ProfileModel> getProfile();
+  Future<ProfileModel> updateProfile();
 }
 
 class AuthRepoImplementation extends AuthRepo {
@@ -61,5 +66,29 @@ class AuthRepoImplementation extends AuthRepo {
   Future<bool> isAuthenticated() async{
       await SharedPref.getUid();
       return AppData.uid != null;
+  }
+
+  @override
+  Future<ProfileModel> getProfile() async{
+   await Future.delayed(const Duration(seconds: 3));
+   return ProfileModel(
+     email: 'email@gmail.com',
+     image: '',
+     phone: '123567899755',
+     name: 'Name',
+     uid: '1356'
+   );
+  }
+
+  @override
+  Future<ProfileModel> updateProfile() async{
+    await Future.delayed(const Duration(seconds: 3));
+    return ProfileModel(
+        email: 'email@gmail.com',
+        image: '',
+        phone: '123567899755',
+        name: 'Updated Name',
+        uid: '1356'
+    );
   }
 }

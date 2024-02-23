@@ -1,6 +1,14 @@
 import 'package:expense_calc/components/constants/AppIcons.dart';
-import 'package:flutter/material.dart';
 
-enum GenderEnum {male,female}
+enum GenderEnum { male, female }
 
-const List<String> bottomTabsList  = [AppIcons.home, AppIcons.wallet, AppIcons.note, AppIcons.user];
+enum TransactionType { fundAdd, rent }
+
+enum ImageType { asset, file, network }
+
+const List<String> bottomTabsList = [
+  AppIcons.home,
+  AppIcons.wallet,
+  AppIcons.note,
+  AppIcons.user
+];

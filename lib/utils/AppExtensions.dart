@@ -1,9 +1,13 @@
 import 'package:expense_calc/components/constants/constants.dart';
 import 'package:expense_calc/components/widgets/dialog/FailureMessageDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../components/coreComponents/AppBSheet.dart';
 import '../components/coreComponents/AppDialog.dart';
 import '../components/coreComponents/AppLoader.dart';
+import '../components/widgets/EditProfileImage.dart';
+import '../model/ImageDataModel.dart';
 
 extension NavigatorExtn on BuildContext{
   // navigate to next screen
@@ -18,18 +22,6 @@ extension NavigatorExtn on BuildContext{
 
   //pop back...
   void  pop() => Navigator.pop(this);
-
-  // // show progress loader....
-  // void get load => appLoader(this);
-  //
-  // // close progressLoader or dialog .....
-  // void get  stopLoader => Navigator.of(this,rootNavigator: false).pop('dialog');
-  //
-  // // show popup dialog ....
-  // void openDialog(Widget child) => appDialog(this, child);
-  //
-  // // check whether is portrait mode state ...
-  // bool get isPortraitMode => MediaQuery.of(this).orientation == Orientation.portrait;
 }
 
 

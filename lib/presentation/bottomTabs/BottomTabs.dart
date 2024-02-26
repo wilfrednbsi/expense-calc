@@ -22,14 +22,19 @@ class BottomTabs extends StatefulWidget {
 class _BottomTabsState extends State<BottomTabs> {
 
   final List<Widget> tabs = [const HomeView(),
-    const WalletView(), //TODO: change with second tab
-    const PlanView(), //TODO: change with third tab
+    const WalletView(),
+    const PlanView(),
     const ProfileTabView()];
+
+
   @override
   void initState() {
     super.initState();
     context.read<ProfileBloc>().add(FetchProfileEvent());
+    _changeTab(0);
   }
+
+  void _changeTab(int index) => context.read<BottomTabsBloc>().add(ChangeTab(index: index));
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +47,7 @@ class _BottomTabsState extends State<BottomTabs> {
           ),
           bottomNavigationBar: BottomNavBar(
             activeIndex: state.index,
-            onSelect: (index) =>
-                context.read<BottomTabsBloc>().add(ChangeTab(index: index)),
+            onSelect: _changeTab,
             tabs: bottomTabsList,
           ),
         );
@@ -111,25 +115,5 @@ class BottomTabsItem extends StatelessWidget {
       tintColor: status ? AppColors.white : AppColors.grey20,
       margin: const EdgeInsets.only(bottom: 3),
     );
-  }
-}
-
-
-
-class SecondTab extends StatelessWidget {
-  const SecondTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class ThirdTab extends StatelessWidget {
-  const ThirdTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

@@ -17,12 +17,6 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
 
   void onNextPage(bool isAuth){
     Future.delayed(const Duration(seconds: 3),(){

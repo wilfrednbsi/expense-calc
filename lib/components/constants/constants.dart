@@ -5,6 +5,7 @@ enum GenderEnum { male, female }
 enum TransactionType { fundAdd, rent }
 
 enum ImageType { asset, file, network }
+enum ImagePickType { camera, gallery }
 
 const List<String> bottomTabsList = [
   AppIcons.home,

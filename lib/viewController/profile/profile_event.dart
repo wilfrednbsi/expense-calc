@@ -32,3 +32,9 @@ class ChangeProfileImageEvent extends ProfileEvent{
   @override
   List<Object?> get props => [data];
 }
+
+
+class LogoutClickEvent extends ProfileEvent{
+  @override
+  List<Object?> get props => [];
+}

@@ -1,5 +1,5 @@
+import 'package:expense_calc/utils/AppUtils.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../model/ImageDataModel.dart';
 import '../constants/AppColors.dart';
@@ -49,22 +49,7 @@ class EditProfileImage extends StatelessWidget {
                   right: 3,
                     bottom: 3,
                     child: ImageEditButton(size: AppFonts.s40,
-                      onTap: (){
-                      appBSheet(context, EditImageBSheetView(onItemTap: (source)async{
-                        Navigator.pop(context);
-                        final ImagePicker picker = ImagePicker();
-                        final XFile? image = await picker.pickImage(source: source);
-                        if(image != null){
-                          ImageDataModel imageDataTemp = imageData;
-                          imageDataTemp.file = image.path;
-                          imageDataTemp.type = ImageType.file;
-                          if(onChange != null){
-                            onChange!(imageDataTemp);
-                          }
-                        }
-                      },
-                      ));
-                      },
+                      onTap: ()=>_openImagePickerBottomSheet(context),
                     )
                 ),
               )
@@ -79,6 +64,23 @@ class EditProfileImage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+
+  void _openImagePickerBottomSheet(BuildContext context){
+    appBSheet(context, EditImageBSheetView(onItemTap: (source)async{
+      Navigator.pop(context);
+      final image = await Utils.pickImage(source);
+      if(image != null){
+        ImageDataModel imageDataTemp = imageData;
+        imageDataTemp.file = image.path;
+        imageDataTemp.type = ImageType.file;
+        if(onChange != null){
+          onChange!(imageDataTemp);
+        }
+      }
+    },
+    ));
   }
 }
 
@@ -112,7 +114,7 @@ class ImageEditButton extends StatelessWidget {
 
 
 class EditImageBSheetView extends StatelessWidget {
-  final Function(ImageSource) onItemTap;
+  final Function(ImagePickType) onItemTap;
   const EditImageBSheetView({super.key, required this.onItemTap});
 
   @override
@@ -128,10 +130,10 @@ class EditImageBSheetView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: AppFonts.s20),
             child: Row(
               children: [
-                _ItemTile(onTap: ()=> onItemTap(ImageSource.camera),
+                _ItemTile(onTap: ()=> onItemTap(ImagePickType.camera),
                     image: AppIcons.camera, name: AppStrings.camera),
                 const SizedBox(width: AppFonts.s20,),
-                _ItemTile(onTap: ()=> onItemTap(ImageSource.gallery),
+                _ItemTile(onTap: ()=> onItemTap(ImagePickType.gallery),
                     image: AppIcons.gallery, name: AppStrings.gallery),
               ],
             ),

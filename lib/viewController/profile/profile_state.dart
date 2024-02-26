@@ -49,3 +49,10 @@ class ProfileLoadingState extends ProfileState {
   @override
   List<Object> get props => [];
 }
+
+
+class ProfileLogoutState extends ProfileState {
+  const ProfileLogoutState();
+  @override
+  List<Object> get props => [];
+}

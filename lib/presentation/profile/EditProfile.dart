@@ -83,7 +83,6 @@ class _EditProfileState extends State<EditProfile> {
               }
             },
             builder: (context, state) {
-              // ImageDataModel imageData = profileBloc(context).getEdImageData;
               ImageDataModel imageData = profileBloc(context).editImageData;
               final formErrorState = state is ProfileFormValidationError ? state : null;
               return Column(

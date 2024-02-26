@@ -16,6 +16,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   var profileData = ProfileModel();
   var imageData = ImageDataModel();
   var editImageData = ImageDataModel();
+
   ProfileBloc() : super(ProfileInitial()) {
     on<ProfileClearErrorEvent>((event, emit) {
       emit(const ProfileFormValidationError(image: '', name: '', phone: ''));
@@ -23,6 +24,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<FetchProfileEvent>(_fetchProfile);
     on<UpdateProfileEvent>(_updateProfile);
     on<ChangeProfileImageEvent>(_changeProfileImage);
+    on<LogoutClickEvent>(_onLogoutClickEvent);
   }
 
   FutureOr<void> _fetchProfile(FetchProfileEvent event, Emitter<ProfileState> emit) async{
@@ -97,6 +99,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   FutureOr<void> _changeProfileImage(ChangeProfileImageEvent event, Emitter<ProfileState> emit) async{
     editImageData = event.data;
+    emit(ProfileInitial());
+  }
+
+  FutureOr<void> _onLogoutClickEvent(LogoutClickEvent event, Emitter<ProfileState> emit) async {
+    repo.logout();
+    emit(const ProfileLogoutState());
+    await Future.delayed(const Duration(seconds: 1));
     emit(ProfileInitial());
   }
 }

@@ -18,6 +18,7 @@ abstract class AuthRepo {
   Future<String> register({required String email, required String password});
 
   Future<ProfileModel> getProfile();
+  void logout();
 
   Future<bool> updateProfile({required ProfileModel data});
 
@@ -103,9 +104,6 @@ class AuthRepoImplementation extends AuthRepo {
   Future<String> uploadImage({required String imagePath, String? oldUrl}) async {
     try{
       final url = await _storage.upload(imagePath);
-      // if(oldUrl != null){
-      //   await _storage.remove(oldUrl);
-      // }
       return url;
     }catch(e){
       rethrow;
@@ -125,5 +123,11 @@ class AuthRepoImplementation extends AuthRepo {
     }catch(e){
       rethrow;
     }
+  }
+
+  @override
+  void logout() {
+     SharedPref.clearUid();
+     return;
   }
 }

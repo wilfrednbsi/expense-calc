@@ -8,6 +8,7 @@ import 'package:expense_calc/presentation/profile/EditProfile.dart';
 import 'package:expense_calc/utils/AppExtensions.dart';
 import 'package:expense_calc/viewController/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/constants/AppColors.dart';
@@ -51,6 +52,11 @@ class _ProfileTabViewState extends State<ProfileTabView> {
         children: [
           BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, state) {
+              if(state is ProfileLogoutState){
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  context.pushAndClearNavigator(const LoginView());
+                });
+              }
               final bloc = context.read<ProfileBloc>();
               final data = bloc.getProfileData;
               return Column(
@@ -84,7 +90,7 @@ class _ProfileTabViewState extends State<ProfileTabView> {
             margin: const EdgeInsets.only(top: AppFonts.s30),
           ),
           TextView(
-            onTap: () => context.pushAndClearNavigator(const LoginView()),
+            onTap: () => context.read<ProfileBloc>().add(LogoutClickEvent()),
             text: AppStrings.logout,
             textStyle: TextStyles.semiBold14Primary,
             margin: const EdgeInsets.only(top: AppFonts.s10),

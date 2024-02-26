@@ -113,7 +113,7 @@ class _CardView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
              const Expanded(child: TextView(text: AppStrings.totalBalance, textStyle: TextStyles.medium16White,)),
-              button(
+              _button(
                   onClick: (){},
                   icon: AppIcons.add, value: AppStrings.addFund)
             ],
@@ -123,7 +123,7 @@ class _CardView extends StatelessWidget {
             ),
           ),
 
-          button(icon: AppIcons.balance, value: '$totalAmount')
+          _button(onClick: null,icon: AppIcons.balance, value: '$totalAmount')
 
         ],
       ),
@@ -131,7 +131,7 @@ class _CardView extends StatelessWidget {
   }
 
 
-  Widget button({required String icon, required String value,  Function()? onClick}){
+  Widget _button({required String icon, required String value,  Function()? onClick}){
     return Row(
       children: [
         AppButton(
@@ -164,18 +164,16 @@ class _TransactionList extends StatelessWidget {
           margin: EdgeInsets.only(top: AppFonts.s20,bottom: AppFonts.s10),
         ),
 
-        ListView.separated(
-          padding: EdgeInsets.zero,
+
+        ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
             itemBuilder: (context, index) => _card(data: TransactionModel(
-              amount: 142563,
-              timeStamp: DateTimeUtils.getCurrentTimeStamp,
-              type: TransactionType.rent.name
+                amount: 142563,
+                timeStamp: DateTimeUtils.getCurrentTimeStamp,
+                type: TransactionType.rent.name
             )),
-            separatorBuilder: (context, index) => const SizedBox(height: AppFonts.s16,),
-            itemCount: 5
-        )
+            itemCount: 5)
       ],
     );
   }
@@ -183,6 +181,7 @@ class _TransactionList extends StatelessWidget {
 
   Widget _card({required TransactionModel data}){
     return Container(
+      margin: const EdgeInsets.only(top: AppFonts.s16),
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(horizontal: AppFonts.s10, vertical: AppFonts.s20),
       decoration: BoxDecoration(

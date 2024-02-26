@@ -24,52 +24,41 @@ class EditProfileImage extends StatelessWidget {
   const EditProfileImage({super.key,
     required this.size, required this.imageData,  this.onChange,  this.isEditable = true, this.margin,  this.error = ''});
 
+  String _getImageUrl() {
+    switch (imageData.type) {
+      case ImageType.network:
+        return imageData.network!;
+      case ImageType.file:
+        return imageData.file!;
+      default:
+        return AppIcons.dummyProfile;
+    }
+  }
+
+  void _showImagePicker(BuildContext context) async {
+    appBSheet(context, EditImageBSheetView(onItemTap: (source) async {
+      Navigator.pop(context);
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: source);
+      if (image != null) {
+        ImageDataModel imageDataTemp = imageData;
+        imageDataTemp.file = image.path;
+        imageDataTemp.type = ImageType.file;
+        if (onChange != null) {
+          onChange!(imageDataTemp);
+        }
+      }
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
       child: Column(
         children: [
-          Stack(
-            children: [
-              ImageView(
-                url: imageData.type == ImageType.network ?
-                    imageData.network! :
-                    imageData.type == ImageType.file ?
-                    imageData.file! :
-                    AppIcons.dummyProfile,
-                size: size,
-                radius: size / 2,
-                fit: BoxFit.cover,
-                imageType: imageData.type,
-              ),
-              Visibility(
-                visible: isEditable,
-                child: Positioned(
-                  right: 3,
-                    bottom: 3,
-                    child: ImageEditButton(size: AppFonts.s40,
-                      onTap: (){
-                      appBSheet(context, EditImageBSheetView(onItemTap: (source)async{
-                        Navigator.pop(context);
-                        final ImagePicker picker = ImagePicker();
-                        final XFile? image = await picker.pickImage(source: source);
-                        if(image != null){
-                          ImageDataModel imageDataTemp = imageData;
-                          imageDataTemp.file = image.path;
-                          imageDataTemp.type = ImageType.file;
-                          if(onChange != null){
-                            onChange!(imageDataTemp);
-                          }
-                        }
-                      },
-                      ));
-                      },
-                    )
-                ),
-              )
-            ],
-          ),
+          _buildProfileImage(context),
+          _buildErrorText(),
           Visibility(
             visible: error != null && error!.isNotEmpty,
               child: TextView(text: error ?? '',textStyle: TextStyles.regular14Error,
@@ -77,6 +66,47 @@ class EditProfileImage extends StatelessWidget {
               )
           )
         ],
+      ),
+    );
+  }
+
+
+  Widget _buildProfileImage(BuildContext context) {
+    return Stack(
+      children: [
+        ImageView(
+          url: _getImageUrl(),
+          size: size,
+          radius: size / 2,
+          fit: BoxFit.cover,
+          imageType: imageData.type,
+        ),
+        Visibility(
+          visible: isEditable,
+          child: Positioned(
+            right: 3,
+            bottom: 3,
+            child: ImageEditButton(
+              size: AppFonts.s40,
+              onTap: () => _showImagePicker(context),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+
+
+
+
+  Widget _buildErrorText() {
+    return Visibility(
+      visible: error != null && error!.isNotEmpty,
+      child: TextView(
+        text: error ?? '',
+        textStyle: TextStyles.regular14Error,
+        margin: const EdgeInsets.only(top: AppFonts.s7),
       ),
     );
   }

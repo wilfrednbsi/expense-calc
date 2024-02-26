@@ -18,10 +18,9 @@ class BottomTabs extends StatefulWidget {
 }
 
 class _BottomTabsState extends State<BottomTabs> {
-  final List<Widget> tabs = [const HomeView(),Container(),Container(),const ProfileTabView()];
+  final List<Widget> tabs = [const HomeView(),const SecondTab(),const ThirdTab(),const ProfileTabView()];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<ProfileBloc>().add(FetchProfileEvent());
   }
@@ -106,5 +105,25 @@ class BottomTabsItem extends StatelessWidget {
       tintColor: status ? AppColors.white : AppColors.grey20,
       margin: const EdgeInsets.only(bottom: 3),
     );
+  }
+}
+
+
+
+class SecondTab extends StatelessWidget {
+  const SecondTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class ThirdTab extends StatelessWidget {
+  const ThirdTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

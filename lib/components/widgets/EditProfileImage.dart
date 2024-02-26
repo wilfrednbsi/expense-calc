@@ -71,7 +71,7 @@ class EditProfileImage extends StatelessWidget {
             ],
           ),
           Visibility(
-            visible: error != null && error!.isNotEmpty,
+            visible: error!.isNotEmpty,
               child: TextView(text: error ?? '',textStyle: TextStyles.regular14Error,
                 margin: const EdgeInsets.only(top: AppFonts.s7),
               )

@@ -1,6 +1,8 @@
 import 'package:expense_calc/components/constants/constants.dart';
 import 'package:expense_calc/presentation/home/HomeView.dart';
+import 'package:expense_calc/presentation/plan/PlanView.dart';
 import 'package:expense_calc/presentation/profile/ProfileTabView.dart';
+import 'package:expense_calc/presentation/wallet/WalletView.dart';
 import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
 import 'package:expense_calc/viewController/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,11 @@ class BottomTabs extends StatefulWidget {
 }
 
 class _BottomTabsState extends State<BottomTabs> {
-  final List<Widget> tabs = [const HomeView(),const SecondTab(),const ThirdTab(),const ProfileTabView()];
+
+  final List<Widget> tabs = [const HomeView(),
+    const WalletView(), //TODO: change with second tab
+    const PlanView(), //TODO: change with third tab
+    const ProfileTabView()];
   @override
   void initState() {
     super.initState();

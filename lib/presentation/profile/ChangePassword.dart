@@ -61,20 +61,22 @@ class _ChangePasswordState extends State<ChangePassword> {
         children: [
           BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
             listener: (context, state) {
-              if(state is ChangePasswordLoadingState){
+              if (state is ChangePasswordLoadingState) {
                 context.load;
-              }else if (state is ChangePasswordSuccessState){
+              } else if (state is ChangePasswordSuccessState) {
                 context.stopLoader;
                 context.pop();
-              }else if (state is ChangePasswordFailureState){
+              } else if (state is ChangePasswordFailureState) {
                 context.stopLoader;
                 context.openFailureDialog(state.message);
-              }else if (state is ChangePasswordFormValidationErrorState){
+              } else if (state is ChangePasswordFormValidationErrorState) {
                 context.stopLoader;
               }
             },
             builder: (context, state) {
-              final formError = state is ChangePasswordFormValidationErrorState ? state : null;
+              final formError = state is ChangePasswordFormValidationErrorState
+                  ? state
+                  : null;
               return Column(
                 children: [
                   EditText(

@@ -70,6 +70,22 @@ extension StringExtn on String{
 
   bool get isEmail => _hasMatch(this,
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+  String get getFileName {
+    int lastIndex = lastIndexOf('/');
+    if (lastIndex != -1 && lastIndex < length - 1) {
+      return substring(lastIndex + 1);
+    }
+    return this;
+  }
+
+  String get getFileExtension {
+    int lastIndex = lastIndexOf('.');
+    if (lastIndex != -1 && lastIndex < length - 1) {
+      return substring(lastIndex);
+    }
+    return '';
+  }
 }
 
 

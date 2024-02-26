@@ -26,7 +26,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
       final newPassword = event.newPassword.trim();
       final confirmPassword = event.confirmPassword.trim();
       if(oldPassword.isNotEmpty && newPassword.isPassword && !newPassword.isEquals(oldPassword) && confirmPassword.isEquals(newPassword)){
-        await repo.updateProfile().then((value){
+        await repo.changePassword(oldPassword: oldPassword, newPassword: newPassword).then((value){
           emit(ChangePasswordSuccessState());
         });
       }else{

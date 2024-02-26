@@ -15,6 +15,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final repo = AuthRepoImplementation();
   var profileData = ProfileModel();
   var imageData = ImageDataModel();
+  var editImageData = ImageDataModel();
   ProfileBloc() : super(ProfileInitial()) {
     on<ProfileClearErrorEvent>((event, emit) {
       emit(const ProfileFormValidationError(image: '', name: '', phone: ''));
@@ -55,19 +56,36 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     return imageData;
   }
 
+
+  ImageDataModel  get getEdImageData {
+    editImageData = ImageDataModel.fromJson(imageData.toJson());
+    return editImageData;
+  }
+
   FutureOr<void> _updateProfile(UpdateProfileEvent event, Emitter<ProfileState> emit) async{
     try{
       emit(const ProfileLoadingState());
       final name = event.name.trim();
       final phone = event.phoneNo.trim();
-      if(imageData.type != ImageType.asset && name.isNotEmpty && phone.isPhone){
-        await repo.updateProfile().then((value) {
+      if(editImageData.type != ImageType.asset && name.isNotEmpty && phone.isPhone){
+        ProfileModel data = ProfileModel(
+          name: name,
+          phone: phone,
+          image: profileData.image
+        );
+        if(editImageData.type == ImageType.file){
+          data.image = await repo.uploadImage(imagePath: editImageData.file!, oldUrl: editImageData.network);
+        }
+        await repo.updateProfile(data: data).then((value) {
           emit(const ProfileSuccessState());
-          emit(GetProfileState(data: value));
+          profileData.name = data.name;
+          profileData.phone = data.phone;
+          profileData.image = data.image;
+          emit(GetProfileState(data: profileData));
         });
       }else{
         emit(ProfileFormValidationError(
-            image: imageData.type == ImageType.asset ? 'Please select your profile picture' : '',
+            image: editImageData.type == ImageType.asset ? 'Please select your profile picture' : '',
             name: name.isNotEmpty ? '': 'Please enter your name',
             phone: phone.isPhone ? '':'Please enter valid mobile number'
         ));
@@ -78,7 +96,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   FutureOr<void> _changeProfileImage(ChangeProfileImageEvent event, Emitter<ProfileState> emit) async{
-    imageData = event.data;
+    editImageData = event.data;
     emit(ProfileInitial());
   }
 }

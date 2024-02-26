@@ -14,6 +14,7 @@ class ProfileModel {
   String? email;
   String? phone;
   String? image;
+  String? password;
 
   ProfileModel({
     this.uid,
@@ -21,6 +22,7 @@ class ProfileModel {
     this.email,
     this.phone,
     this.image,
+    this.password,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -29,12 +31,21 @@ class ProfileModel {
     email: json["email"],
     phone: json["phone"],
     image: json["image"],
+    password: json["password"],
   );
 
   Map<String, dynamic> toJson() => {
     "uid": uid,
     "name": name,
     "email": email,
+    "phone": phone,
+    "image": image,
+    "password": password,
+  };
+
+
+  Map<String, dynamic> toJsonUpdateDoc() => {
+    "name": name,
     "phone": phone,
     "image": image,
   };

@@ -1,5 +1,10 @@
 import 'package:expense_calc/components/constants/constants.dart';
+import 'package:expense_calc/presentation/home/HomeView.dart';
+import 'package:expense_calc/presentation/plan/PlanView.dart';
+import 'package:expense_calc/presentation/profile/ProfileTabView.dart';
+import 'package:expense_calc/presentation/wallet/WalletView.dart';
 import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
+import 'package:expense_calc/viewController/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,21 +20,26 @@ class BottomTabs extends StatefulWidget {
 }
 
 class _BottomTabsState extends State<BottomTabs> {
+
+  final List<Widget> tabs = [const HomeView(),
+    const WalletView(), //TODO: change with second tab
+    const PlanView(), //TODO: change with third tab
+    const ProfileTabView()];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    context.read<ProfileBloc>().add(FetchProfileEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BottomTabsBloc, BottomTabsState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: Container(),
+          body: SafeArea(
+            child: tabs[state.index],
+          ),
           bottomNavigationBar: BottomNavBar(
             activeIndex: state.index,
             onSelect: (index) =>
@@ -101,5 +111,25 @@ class BottomTabsItem extends StatelessWidget {
       tintColor: status ? AppColors.white : AppColors.grey20,
       margin: const EdgeInsets.only(bottom: 3),
     );
+  }
+}
+
+
+
+class SecondTab extends StatelessWidget {
+  const SecondTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class ThirdTab extends StatelessWidget {
+  const ThirdTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

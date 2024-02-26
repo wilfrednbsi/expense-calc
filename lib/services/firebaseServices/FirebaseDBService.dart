@@ -19,6 +19,11 @@ abstract class FirebaseDB {
     return id;
   }
 
+  Future<String> updateDoc(String id, Map<String, dynamic> data) async {
+    await collection.doc(id).update(data);
+    return id;
+  }
+
   Future<void> update(String documentId, Map<String, dynamic> data) async {
     await collection.doc(documentId).update(data);
   }

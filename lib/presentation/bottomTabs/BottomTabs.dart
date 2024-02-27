@@ -5,6 +5,7 @@ import 'package:expense_calc/presentation/profile/ProfileTabView.dart';
 import 'package:expense_calc/presentation/wallet/WalletView.dart';
 import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
 import 'package:expense_calc/viewController/profile/profile_bloc.dart';
+import 'package:expense_calc/viewController/transaction/transaction_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +29,7 @@ class _BottomTabsState extends State<BottomTabs> {
   @override
   void initState() {
     super.initState();
+    context.read<TransactionBloc>().add(GetTransactionEvent());
     context.read<ProfileBloc>().add(FetchProfileEvent());
     _changeTab(0);
   }
@@ -85,10 +87,7 @@ class BottomNavBar extends StatelessWidget {
                 BottomTabsItem(
                     icon: value ?? '',
                     status: activeIndex == index,
-                    onTap: () {
-                      onSelect(index);
-                      // bookingCtrl.swapBookingFlag.value = false;
-                    })))
+                    onTap: () => onSelect(index))))
             .values
             .toList(),
       ),

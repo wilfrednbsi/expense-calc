@@ -15,12 +15,14 @@ class TransactionModel {
   String? type;
   num? amount;
   String? desc;
+  String? uid;
 
   TransactionModel({
     this.timeStamp,
     this.type,
     this.amount,
     this.desc,
+    this.uid,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
@@ -28,6 +30,7 @@ class TransactionModel {
     type: json["type"],
     amount: json["amount"],
     desc: json["desc"],
+    uid: json["uid"],
   );
 
   TransactionType get getType {
@@ -57,5 +60,6 @@ class TransactionModel {
     "type": type,
     "amount": amount,
     "desc": desc,
+    "uid": uid,
   };
 }

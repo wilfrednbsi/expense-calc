@@ -1,26 +1,83 @@
+import 'package:expense_calc/model/SummaryModel.dart';
+import 'package:expense_calc/model/TransactionModel.dart';
+import 'package:expense_calc/services/firebaseServices/FirebaseDBService.dart';
+import 'package:expense_calc/services/localData/AppData.dart';
+
 abstract class TransactionRepo {
-  Future<bool> addFund({required num amount});
-  Future<bool> newTransaction({required num amount, required String desc});
-  Future<bool> addToPlan({required num amount, required String planId});
+  Future<bool> addTransaction({required TransactionModel data, required SummaryModel summary});
+
+  Future<List<TransactionModel>> getTransactions();
+  Future<SummaryModel> getSummary();
 }
 
-class TransactionRepoImplementation extends TransactionRepo{
+class TransactionRepoImplementation extends TransactionRepo {
+  final _transColl = FirebaseDBService('data', 'transaction');
+  final _summaryColl = FirebaseDBService('data', 'summary');
+
   @override
-  Future<bool> addFund({required num amount}) async{
-    await Future.delayed(const Duration(seconds: 3));
-    return true;
+  Future<bool> addTransaction({required TransactionModel data, required SummaryModel summary}) async {
+    try {
+      await _transColl.setDoc('${data.timeStamp}', data.toJson());
+      await _summaryColl.setDoc(AppData.uid!, summary.toJson());
+      return true;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<bool> newTransaction({required num amount, required String desc}) async{
-    await Future.delayed(const Duration(seconds: 3));
-    return true;
+  Future<List<TransactionModel>> getTransactions() async {
+    try {
+      final snapShot = await _transColl.documentsWhere(
+          compareField: 'uid', compareValue: AppData.uid);
+      if (snapShot.size > 0) {
+        List<TransactionModel> list = List<TransactionModel>.from(snapShot.docs
+            .map((doc) =>
+                TransactionModel.fromJson(doc.data() as Map<String, dynamic>)));
+        list.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<bool> addToPlan({required num amount, required String planId}) async{
-    await Future.delayed(const Duration(seconds: 3));
-    return true;
-  }
+  Future<SummaryModel> getSummary() async{
+    try {
+      try {
+        final doc = await _summaryColl.getDoc(AppData.uid!);
+        if (doc.exists && doc.data() != null) {
+          final data = doc.data() as Map<String, dynamic>;
+          return SummaryModel.fromJson(data);
+        } else {
+          return SummaryModel();
+        }
+      } catch (e) {
+        rethrow;
+      }
 
+
+
+
+
+
+
+      // final snapShot = await _transColl.documentsWhere(
+      //     compareField: 'uid', compareValue: AppData.uid);
+      // if (snapShot.size > 0) {
+      //   List<TransactionModel> list = List<TransactionModel>.from(snapShot.docs
+      //       .map((doc) =>
+      //       TransactionModel.fromJson(doc.data() as Map<String, dynamic>)));
+      //   list.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
+      //   return list;
+      // } else {
+      //   return [];
+      // }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

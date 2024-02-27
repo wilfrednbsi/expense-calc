@@ -24,3 +24,9 @@ class NewTransactionEvent extends TransactionEvent {
   List<Object?> get props => [amount,desc];
 }
 
+
+class GetTransactionEvent extends TransactionEvent {
+  @override
+  List<Object?> get props => [];
+}
+

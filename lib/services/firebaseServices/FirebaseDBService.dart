@@ -49,14 +49,10 @@ abstract class FirebaseDB {
         .toList());
   }
 
-  Future<QuerySnapshot<Object?>> documentsWithOrderWhere({
-    required String compareField,required compareValue,
-    required String sortField, bool descending = false
+  Future<QuerySnapshot<Object?>> documentsWhere({
+    required String compareField,required compareValue
   }) {
-    return collection
-        .where(compareField,isEqualTo: compareValue)
-        // .orderBy(sortField,descending: descending)
-        .get();
+    return collection.where(compareField,isEqualTo: compareValue).get();
   }
 }
 

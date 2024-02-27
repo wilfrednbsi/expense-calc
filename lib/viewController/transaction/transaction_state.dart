@@ -14,11 +14,6 @@ class TransactionLoadingState extends TransactionState {
   List<Object> get props => [];
 }
 
-class ChangeState extends TransactionState {
-  @override
-  List<Object> get props => [];
-}
-
 class NewTransactionLoadingState extends TransactionState {
   @override
   List<Object> get props => [];

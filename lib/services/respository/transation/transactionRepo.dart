@@ -58,24 +58,6 @@ class TransactionRepoImplementation extends TransactionRepo {
       } catch (e) {
         rethrow;
       }
-
-
-
-
-
-
-
-      // final snapShot = await _transColl.documentsWhere(
-      //     compareField: 'uid', compareValue: AppData.uid);
-      // if (snapShot.size > 0) {
-      //   List<TransactionModel> list = List<TransactionModel>.from(snapShot.docs
-      //       .map((doc) =>
-      //       TransactionModel.fromJson(doc.data() as Map<String, dynamic>)));
-      //   list.sort((a, b) => b.timeStamp!.compareTo(a.timeStamp!));
-      //   return list;
-      // } else {
-      //   return [];
-      // }
     } catch (e) {
       rethrow;
     }

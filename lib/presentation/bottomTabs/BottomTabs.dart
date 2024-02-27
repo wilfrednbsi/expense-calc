@@ -29,7 +29,10 @@ class _BottomTabsState extends State<BottomTabs> {
   @override
   void initState() {
     super.initState();
-    context.read<TransactionBloc>().add(GetTransactionEvent());
+    final transBloc = context.read<TransactionBloc>();
+    if (transBloc.state is TransactionInitial) {
+      transBloc.add(GetTransactionEvent());
+    }
     context.read<ProfileBloc>().add(FetchProfileEvent());
     _changeTab(0);
   }

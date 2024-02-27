@@ -107,7 +107,6 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
 
   FutureOr<void> _getData(GetTransactionEvent event, Emitter<TransactionState> emit) async{
     try{
-     emit(ChangeState());
      await Future.delayed(const Duration(milliseconds: 200));
       emit(TransactionLoadingState());
       await repo.getSummary().then((value) {

@@ -48,4 +48,5 @@ class AppStrings {
   static const String amount = "Amount";
   static const String shortDesc = "Short Description";
   static const String noTransactionRecord = "No transaction record!";
+
 }

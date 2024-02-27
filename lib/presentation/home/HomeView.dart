@@ -3,15 +3,16 @@ import 'package:expense_calc/components/constants/AppFonts.dart';
 import 'package:expense_calc/components/constants/AppIcons.dart';
 import 'package:expense_calc/components/constants/AppStrings.dart';
 import 'package:expense_calc/components/constants/TextStyles.dart';
-import 'package:expense_calc/components/constants/constants.dart';
 import 'package:expense_calc/components/coreComponents/AppButton.dart';
 import 'package:expense_calc/components/coreComponents/ImageView.dart';
 import 'package:expense_calc/components/coreComponents/TextView.dart';
 import 'package:expense_calc/components/widgets/AppBar2.dart';
-import 'package:expense_calc/model/TransactionModel.dart';
 import 'package:expense_calc/utils/AppExtensions.dart';
-import 'package:expense_calc/utils/DateTimeUtils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../viewController/transaction/transaction_bloc.dart';
+import '../wallet/WalletView.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,6 +22,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late TransactionBloc tranBloc;
+  @override
+  void initState() {
+    super.initState();
+    tranBloc = context.read<TransactionBloc>();
+  }
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -35,20 +42,34 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-
-
   Widget mainView(){
-    return const Expanded(child: SingleChildScrollView(
-      padding: EdgeInsets.all(AppFonts.s16),
-      child: Column(
-        children: [
-          _CardView(
-            totalAmount: 1452896,
-          ),
-          _CategoryView(),
-          _TransactionList()
-        ],
-      ),
+    return  Expanded(child: SingleChildScrollView(
+      padding: const EdgeInsets.all(AppFonts.s16),
+      child: BlocConsumer<TransactionBloc, TransactionState>(
+        listener: (context, state) {
+          if(state is TransactionLoadingState){
+            context.load;
+          }else if(state is TransactionFailureState){
+            context.stopLoader;
+            context.openFailureDialog(state.error);
+          }else if(state is TransactionSuccessState){
+            context.stopLoader;
+          }else if(state is TransactionAddFundFormError){
+            context.stopLoader;
+          }else if (state is TransactionCloseBSheetState){
+            context.pop();
+          }
+        },
+        builder: (context, state) {
+          return  Column(
+            children: [
+              const _CardView(),
+              const _CategoryView(),
+              TransactionHistoryList(list: tranBloc.getLastTransactions, title: 'Last Transactions',)
+            ],
+          );
+        },
+      )
     ));
   }
 }
@@ -58,20 +79,34 @@ class _CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const TextView(text: AppStrings.categories,textStyle: TextStyles.regular14Black,
-          margin: EdgeInsets.only(top: AppFonts.s20,bottom: AppFonts.s10),
-        ),
-        Row(children: [
-          Expanded(child: _card(value: '1452639',title: AppStrings.need)),
-          const SizedBox(width: AppFonts.s16,),
-          Expanded(child: _card(value: '1452639',title: AppStrings.expenses)),
-        ],),
-        const SizedBox(height: AppFonts.s16,),
-        _card(value: '1452639',title: AppStrings.savings),
-      ],
+    TransactionBloc transactionBloc = context.read<TransactionBloc>();
+    return BlocBuilder<TransactionBloc, TransactionState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const TextView(
+              text: AppStrings.categories,
+              textStyle: TextStyles.regular14Black,
+              margin: EdgeInsets.only(top: AppFonts.s20, bottom: AppFonts.s10),
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: _card(
+                        value: '${transactionBloc.expenses}',
+                        title: AppStrings.expenses)),
+                const SizedBox(
+                  width: AppFonts.s16,
+                ),
+                Expanded(
+                    child: _card(
+                        value: '${transactionBloc.savings}', title: AppStrings.savings)),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -94,11 +129,11 @@ class _CategoryView extends StatelessWidget {
 }
 
 class _CardView extends StatelessWidget {
-  final num totalAmount;
-  const _CardView({super.key, required this.totalAmount});
+  const _CardView({super.key,});
 
   @override
   Widget build(BuildContext context) {
+    TransactionBloc transactionBloc = context.read<TransactionBloc>();
     return Container(
       width: double.maxFinite,
       padding: const EdgeInsets.all(AppFonts.s10),
@@ -114,17 +149,22 @@ class _CardView extends StatelessWidget {
             children: [
               const Expanded(child: TextView(text: AppStrings.totalBalance, textStyle: TextStyles.medium16White,)),
               button(
-                  onClick: (){},
+                  onClick: () => addFundBSheet(context),
                   icon: AppIcons.add, value: AppStrings.addFund)
             ],
           ),
-          TextView(text: '${AppStrings.rupeeUnicode} $totalAmount', textStyle: TextStyles.semiBold30White,
-            margin: const EdgeInsets.only(top: AppFonts.s7, bottom: AppFonts.s30
-            ),
-          ),
 
-          button(icon: AppIcons.balance, value: '$totalAmount')
-
+          BlocBuilder<TransactionBloc, TransactionState>(
+            builder: (context, state) {
+              return TextView(
+                text:
+                '${AppStrings.rupeeUnicode} ${transactionBloc.availableAmount}',
+                textStyle: TextStyles.semiBold30White,
+                margin: const EdgeInsets.only(
+                    top: AppFonts.s7, bottom: AppFonts.s30),
+              );
+            },
+          )
         ],
       ),
     );
@@ -148,59 +188,6 @@ class _CardView extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _TransactionList extends StatelessWidget {
-  const _TransactionList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const TextView(text: AppStrings.allTransactions,textStyle: TextStyles.regular14Black,
-          margin: EdgeInsets.only(top: AppFonts.s20,bottom: AppFonts.s10),
-        ),
-
-        ListView.separated(
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) => _card(data: TransactionModel(
-                amount: 142563,
-                timeStamp: DateTimeUtils.getCurrentTimeStamp,
-                type: TransactionType.rent.name
-            )),
-            separatorBuilder: (context, index) => const SizedBox(height: AppFonts.s16,),
-            itemCount: 5
-        )
-      ],
-    );
-  }
-
-
-  Widget _card({required TransactionModel data}){
-    return Container(
-      width: double.maxFinite,
-      padding: const EdgeInsets.symmetric(horizontal: AppFonts.s10, vertical: AppFonts.s20),
-      decoration: BoxDecoration(
-          color: AppColors.grey40.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(AppFonts.s10)
-      ),
-      child: Row(
-        children: [
-          Expanded(child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextView(text: data.getType.getName,textStyle: TextStyles.regular14Black,),
-              TextView(text: data.timeStamp!.ddMMMyyyy_hhmma,textStyle: TextStyles.regular10Black,)
-            ],
-          )),
-          TextView(text: '${data.transactionSign} ${AppStrings.rupeeUnicode} ${data.amount}',textStyle: TextStyles.medium16Black,)
-        ],
-      ),
     );
   }
 }

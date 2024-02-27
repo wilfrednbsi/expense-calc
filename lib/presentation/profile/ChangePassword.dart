@@ -26,8 +26,11 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   void initState() {
     super.initState();
-    passwordBloc = _getPasswordBloc(context);
-    passwordBloc.add(const ClearFormErrorEvent());
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      passwordBloc = _getPasswordBloc(context);
+      passwordBloc.add(const ClearFormErrorEvent());
+    });
+
   }
 
   ChangePasswordBloc _getPasswordBloc(BuildContext context) {

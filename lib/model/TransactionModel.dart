@@ -13,18 +13,21 @@ String transactionModelToJson(TransactionModel data) => json.encode(data.toJson(
 class TransactionModel {
   int? timeStamp;
   String? type;
-  int? amount;
+  num? amount;
+  String? desc;
 
   TransactionModel({
     this.timeStamp,
     this.type,
     this.amount,
+    this.desc,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
     timeStamp: json["timeStamp"],
     type: json["type"],
     amount: json["amount"],
+    desc: json["desc"],
   );
 
   TransactionType get getType {
@@ -41,7 +44,7 @@ class TransactionModel {
     String result = '';
     if(getType == TransactionType.fundAdd){
       result = '+';
-    }else if(getType == TransactionType.rent){
+    }else if(getType == TransactionType.rent || getType == TransactionType.expenses){
       result = '-';
     }
     return result;
@@ -53,5 +56,6 @@ class TransactionModel {
     "timeStamp": timeStamp,
     "type": type,
     "amount": amount,
+    "desc": desc,
   };
 }

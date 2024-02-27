@@ -2,6 +2,7 @@ import 'package:expense_calc/components/constants/constants.dart';
 import 'package:expense_calc/components/widgets/dialog/FailureMessageDialog.dart';
 import 'package:flutter/material.dart';
 
+import '../components/coreComponents/AppBSheet.dart';
 import '../components/coreComponents/AppDialog.dart';
 import '../components/coreComponents/AppLoader.dart';
 
@@ -18,18 +19,6 @@ extension NavigatorExtn on BuildContext{
 
   //pop back...
   void  pop() => Navigator.pop(this);
-
-  // // show progress loader....
-  // void get load => appLoader(this);
-  //
-  // // close progressLoader or dialog .....
-  // void get  stopLoader => Navigator.of(this,rootNavigator: false).pop('dialog');
-  //
-  // // show popup dialog ....
-  // void openDialog(Widget child) => appDialog(this, child);
-  //
-  // // check whether is portrait mode state ...
-  // bool get isPortraitMode => MediaQuery.of(this).orientation == Orientation.portrait;
 }
 
 
@@ -54,6 +43,10 @@ extension AppStateExtn on BuildContext{
     },
   ));
 
+
+  // show bottom sheet  ....
+  void openBottomSheet(Widget child) => appBSheet(this,child);
+
 // check whether is portrait mode state ...
   bool get isPortraitMode =>
       MediaQuery.of(this).orientation == Orientation.portrait;
@@ -66,7 +59,10 @@ extension StringExtn on String{
   bool get isPassword => length > 6 && length< 25;
 
   bool isEquals(String value) => compareTo(value) == 0;
-  bool get isPhone => true;
+  bool get isPhone {
+      if (length > 16 || length < 9) return false;
+      return _hasMatch(this, r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
+  }
 
   bool get isEmail => _hasMatch(this,
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
@@ -86,6 +82,13 @@ extension StringExtn on String{
     }
     return '';
   }
+
+   bool get isNum {
+    if ( trim().isEmpty)return false;
+    return num.tryParse(this) is num;
+  }
+
+  num get getNum => num.parse(this);
 }
 
 

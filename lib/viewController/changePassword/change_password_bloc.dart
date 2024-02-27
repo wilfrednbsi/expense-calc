@@ -16,6 +16,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
   }
 
   FutureOr<void> _clearFormError(ClearFormErrorEvent event, Emitter<ChangePasswordState> emit) {
+    emit(ChangePasswordLoadingState());
     emit(const ChangePasswordFormValidationErrorState(oldPassword: '', newPassword: '', confirmPassword: ''));
   }
 

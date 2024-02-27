@@ -18,6 +18,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   var editImageData = ImageDataModel();
   ProfileBloc() : super(ProfileInitial()) {
     on<ProfileClearErrorEvent>((event, emit) {
+      emit(const ProfileLoadingState());
       emit(const ProfileFormValidationError(image: '', name: '', phone: ''));
     });
     on<FetchProfileEvent>(_fetchProfile);

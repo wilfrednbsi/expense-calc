@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../constants/AppColors.dart';
 import '../constants/AppFonts.dart';
 import '../constants/TextStyles.dart';
@@ -18,7 +19,9 @@ class EditText extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
   final Function(String)? onChange;
-  const EditText({super.key, required this.controller, this.readOnly, this.padding, this.margin, this.radius, this.borderColor, this.filledColor, this.isFilled = true, this.hint, this.hintStyle, this.textStyle, this.error,  this.isPassword = false, this.onChange});
+  final List<TextInputFormatter>? format;
+  final TextInputType? inputType;
+  const EditText({super.key, required this.controller, this.readOnly, this.padding, this.margin, this.radius, this.borderColor, this.filledColor, this.isFilled = true, this.hint, this.hintStyle, this.textStyle, this.error,  this.isPassword = false, this.onChange, this.format, this.inputType});
 
   @override
   State<EditText> createState() => _EditTextState();
@@ -32,6 +35,9 @@ class _EditTextState extends State<EditText> {
     return Padding(
       padding: widget.margin ?? EdgeInsets.zero,
       child: TextField(
+        onTapOutside: (event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         style: widget.textStyle ?? TextStyles.regular14Black,
         decoration: InputDecoration(
           hintText: widget.hint,
@@ -45,6 +51,8 @@ class _EditTextState extends State<EditText> {
                 ? null
                 : widget.error
         ),
+        inputFormatters: widget.format,
+        keyboardType: widget.inputType,
         obscureText: widget.isPassword,
         readOnly: widget.readOnly ?? false,
         controller: widget.controller,

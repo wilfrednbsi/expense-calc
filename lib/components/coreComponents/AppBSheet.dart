@@ -7,6 +7,7 @@ appBSheet(BuildContext context, Widget child,{Color? barrierColor}){
     showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
+
         barrierColor: barrierColor,
         backgroundColor: AppColors.white,
         shape: const RoundedRectangleBorder(
@@ -17,8 +18,9 @@ appBSheet(BuildContext context, Widget child,{Color? barrierColor}){
         ),
         builder: (BuildContext context) {
           return Padding(
-            padding: const EdgeInsets.only(top: AppFonts.s20),
+            padding: EdgeInsets.only(
+                top: AppFonts.s20,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: child,
           );});
-
  }

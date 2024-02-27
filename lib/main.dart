@@ -4,6 +4,7 @@ import 'package:expense_calc/viewController/changePassword/change_password_bloc.
 import 'package:expense_calc/viewController/login/login_bloc.dart';
 import 'package:expense_calc/viewController/profile/profile_bloc.dart';
 import 'package:expense_calc/viewController/signup/sign_up_bloc.dart';
+import 'package:expense_calc/viewController/transaction/transaction_bloc.dart';
 import 'package:flutter/material.dart';
 import 'presentation/launcher/SplashView.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,7 @@ List<SingleChildWidget> providers = [
   BlocProvider(create: (context) => BottomTabsBloc()),
   BlocProvider(create: (context) => ProfileBloc()),
   BlocProvider(create: (context) => ChangePasswordBloc()),
+  BlocProvider(create: (context) => TransactionBloc()),
 ];
 
 

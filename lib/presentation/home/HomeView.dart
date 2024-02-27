@@ -25,10 +25,10 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-         const AppBar2(
+        const AppBar2(
           title: AppStrings.appName,
           titleStyle: TextStyles.bold22Black,
-           isLeadVisible: false,
+          isLeadVisible: false,
         ),
         mainView(),
       ],
@@ -80,8 +80,8 @@ class _CategoryView extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(horizontal: AppFonts.s10, vertical: AppFonts.s30),
       decoration: BoxDecoration(
-        color: AppColors.grey40.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(AppFonts.s10)
+          color: AppColors.grey40.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(AppFonts.s10)
       ),
       child:  Column(
         children: [
@@ -103,8 +103,8 @@ class _CardView extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.all(AppFonts.s10),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(AppFonts.s16)
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(AppFonts.s16)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,8 +112,8 @@ class _CardView extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-             const Expanded(child: TextView(text: AppStrings.totalBalance, textStyle: TextStyles.medium16White,)),
-              _button(
+              const Expanded(child: TextView(text: AppStrings.totalBalance, textStyle: TextStyles.medium16White,)),
+              button(
                   onClick: (){},
                   icon: AppIcons.add, value: AppStrings.addFund)
             ],
@@ -123,7 +123,7 @@ class _CardView extends StatelessWidget {
             ),
           ),
 
-          _button(onClick: null,icon: AppIcons.balance, value: '$totalAmount')
+          button(icon: AppIcons.balance, value: '$totalAmount')
 
         ],
       ),
@@ -131,7 +131,7 @@ class _CardView extends StatelessWidget {
   }
 
 
-  Widget _button({required String icon, required String value,  Function()? onClick}){
+  Widget button({required String icon, required String value,  Function()? onClick}){
     return Row(
       children: [
         AppButton(
@@ -164,16 +164,18 @@ class _TransactionList extends StatelessWidget {
           margin: EdgeInsets.only(top: AppFonts.s20,bottom: AppFonts.s10),
         ),
 
-
-        ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
+        ListView.separated(
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             itemBuilder: (context, index) => _card(data: TransactionModel(
                 amount: 142563,
                 timeStamp: DateTimeUtils.getCurrentTimeStamp,
                 type: TransactionType.rent.name
             )),
-            itemCount: 5)
+            separatorBuilder: (context, index) => const SizedBox(height: AppFonts.s16,),
+            itemCount: 5
+        )
       ],
     );
   }
@@ -181,7 +183,6 @@ class _TransactionList extends StatelessWidget {
 
   Widget _card({required TransactionModel data}){
     return Container(
-      margin: const EdgeInsets.only(top: AppFonts.s16),
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(horizontal: AppFonts.s10, vertical: AppFonts.s20),
       decoration: BoxDecoration(
@@ -197,7 +198,7 @@ class _TransactionList extends StatelessWidget {
               TextView(text: data.timeStamp!.ddMMMyyyy_hhmma,textStyle: TextStyles.regular10Black,)
             ],
           )),
-           TextView(text: '${data.transactionSign} ${AppStrings.rupeeUnicode} ${data.amount}',textStyle: TextStyles.medium16Black,)
+          TextView(text: '${data.transactionSign} ${AppStrings.rupeeUnicode} ${data.amount}',textStyle: TextStyles.medium16Black,)
         ],
       ),
     );

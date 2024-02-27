@@ -14,6 +14,8 @@ class AppStrings {
   static const String haveAnAccount = "Have an Account? ";
   static const String forgotPasswordSubtitleDesc = "Enter email address linked with your account, We will send you email to reset your password ";
   static const String totalBalance = "Total Balance";
+  static const String availableBalance = "Available Balance";
+  static const String income = "Income";
   static const String rupeeUnicode = "₹";
   static const String addFund = "Add Fund";
   static const String categories = "Categories";
@@ -36,4 +38,14 @@ class AppStrings {
   static const String enterYourOldPassword = "Enter your old password";
   static const String enterNewPassword = "Enter new password";
   static const String change = "Change";
+  static const String wallet = "Wallet";
+  static const String newTransaction = "New Transaction";
+  static const String selectMethod = "Select Method";
+  static const String addToPlan = "Add to plan";
+  static const String add = "Add";
+  static const String createTransaction = "Create Transaction";
+  static const String submit = "Submit";
+  static const String amount = "Amount";
+  static const String shortDesc = "Short Description";
+  static const String noTransactionRecord = "No transaction record!";
 }

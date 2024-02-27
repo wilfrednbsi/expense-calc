@@ -32,14 +32,13 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    profileBloc(context).add(ProfileClearErrorEvent());
-    final data = profileBloc(context).getProfileData;
-    profileBloc(context).getEdImageData;
-    nameCtrl.text = data.name ?? '';
-    phoneCtrl.text = data.phone ?? '';
-    emailCtrl.text = data.email ?? '';
+      profileBloc(context).add(ProfileClearErrorEvent());
+      final data = profileBloc(context).getProfileData;
+      profileBloc(context).getEdImageData;
+      nameCtrl.text = data.name ?? '';
+      phoneCtrl.text = data.phone ?? '';
+      emailCtrl.text = data.email ?? '';
   }
 
 
@@ -83,7 +82,6 @@ class _EditProfileState extends State<EditProfile> {
               }
             },
             builder: (context, state) {
-              // ImageDataModel imageData = profileBloc(context).getEdImageData;
               ImageDataModel imageData = profileBloc(context).editImageData;
               final formErrorState = state is ProfileFormValidationError ? state : null;
               return Column(
@@ -95,7 +93,7 @@ class _EditProfileState extends State<EditProfile> {
                         imageData: imageData,
                         margin: const EdgeInsets.only(bottom: AppFonts.s30),
                         onChange: (data)=>profileBloc(context).add(ChangeProfileImageEvent(data: data)),
-                        error: formErrorState?.image,
+                        error: formErrorState?.image ?? '',
                       );
                     },
                   ),

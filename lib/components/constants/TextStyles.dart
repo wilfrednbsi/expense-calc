@@ -26,6 +26,7 @@ class TextStyles{
   //medium
   static const TextStyle medium10Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s10, fontFamily: Family.medium);
   static const TextStyle medium12White = TextStyle(color: AppColors.white, fontSize: AppFonts.s12, fontFamily: Family.medium);
+  static const TextStyle medium12Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s12, fontFamily: Family.medium);
   static const TextStyle medium14White = TextStyle(color: AppColors.white, fontSize: AppFonts.s14, fontFamily: Family.medium);
   static const TextStyle medium14Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s14, fontFamily: Family.medium);
   static const TextStyle medium16TextHint = TextStyle(color: AppColors.grey50, fontSize: AppFonts.s16, fontFamily: Family.medium);
@@ -41,6 +42,7 @@ class TextStyles{
   static const TextStyle semiBold14Primary = TextStyle(color: AppColors.primaryColor, fontSize: AppFonts.s14, fontFamily: Family.semiBold);
   static const TextStyle semiBold16Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s16, fontFamily: Family.semiBold);
   static const TextStyle semiBold20Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s20, fontFamily: Family.semiBold);
+  static const TextStyle semiBold24Black = TextStyle(color: AppColors.black, fontSize: AppFonts.s24, fontFamily: Family.semiBold);
   static const TextStyle semiBold16P_Green= TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s16, fontFamily: Family.semiBold);
   static const TextStyle semiBold30P_Green = TextStyle(color: AppColors.primaryGreen, fontSize: AppFonts.s30, fontFamily: Family.semiBold);
   static const TextStyle semiBold30White = TextStyle(color: AppColors.white, fontSize: AppFonts.s30, fontFamily: Family.semiBold);

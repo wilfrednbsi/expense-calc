@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import '../constants/AppColors.dart';
+import '../constants/constants.dart';
 import 'TapWidget.dart';
 
-enum ImageType { asset, file, network }
 
 class ImageView extends StatelessWidget {
   final String url;

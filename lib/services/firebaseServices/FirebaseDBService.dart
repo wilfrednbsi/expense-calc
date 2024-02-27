@@ -19,6 +19,11 @@ abstract class FirebaseDB {
     return id;
   }
 
+  Future<String> updateDoc(String id, Map<String, dynamic> data) async {
+    await collection.doc(id).update(data);
+    return id;
+  }
+
   Future<void> update(String documentId, Map<String, dynamic> data) async {
     await collection.doc(documentId).update(data);
   }
@@ -44,14 +49,10 @@ abstract class FirebaseDB {
         .toList());
   }
 
-  Future<QuerySnapshot<Object?>> documentsWithOrderWhere({
-    required String compareField,required compareValue,
-    required String sortField, bool descending = false
+  Future<QuerySnapshot<Object?>> documentsWhere({
+    required String compareField,required compareValue
   }) {
-    return collection
-        .where(compareField,isEqualTo: compareValue)
-        // .orderBy(sortField,descending: descending)
-        .get();
+    return collection.where(compareField,isEqualTo: compareValue).get();
   }
 }
 

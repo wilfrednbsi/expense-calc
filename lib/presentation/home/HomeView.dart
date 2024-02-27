@@ -25,10 +25,10 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-         const AppBar2(
+        const AppBar2(
           title: AppStrings.appName,
           titleStyle: TextStyles.bold22Black,
-           isLeadVisible: false,
+          isLeadVisible: false,
         ),
         mainView(),
       ],
@@ -80,8 +80,8 @@ class _CategoryView extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.symmetric(horizontal: AppFonts.s10, vertical: AppFonts.s30),
       decoration: BoxDecoration(
-        color: AppColors.grey40.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(AppFonts.s10)
+          color: AppColors.grey40.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(AppFonts.s10)
       ),
       child:  Column(
         children: [
@@ -103,8 +103,8 @@ class _CardView extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.all(AppFonts.s10),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(AppFonts.s16)
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(AppFonts.s16)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +112,7 @@ class _CardView extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-             const Expanded(child: TextView(text: AppStrings.totalBalance, textStyle: TextStyles.medium16White,)),
+              const Expanded(child: TextView(text: AppStrings.totalBalance, textStyle: TextStyles.medium16White,)),
               button(
                   onClick: (){},
                   icon: AppIcons.add, value: AppStrings.addFund)
@@ -165,13 +165,13 @@ class _TransactionList extends StatelessWidget {
         ),
 
         ListView.separated(
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             itemBuilder: (context, index) => _card(data: TransactionModel(
-              amount: 142563,
-              timeStamp: DateTimeUtils.getCurrentTimeStamp,
-              type: TransactionType.rent.name
+                amount: 142563,
+                timeStamp: DateTimeUtils.getCurrentTimeStamp,
+                type: TransactionType.rent.name
             )),
             separatorBuilder: (context, index) => const SizedBox(height: AppFonts.s16,),
             itemCount: 5
@@ -198,7 +198,8 @@ class _TransactionList extends StatelessWidget {
               TextView(text: data.timeStamp!.ddMMMyyyy_hhmma,textStyle: TextStyles.regular10Black,)
             ],
           )),
-           TextView(text: '${data.transactionSign} ${AppStrings.rupeeUnicode} ${data.amount}',textStyle: TextStyles.medium16Black,)
+          TextView(text: '${data.transactionSign} ${AppStrings.rupeeUnicode} ${data.amount}',textStyle: TextStyles.medium16Black,)
+
         ],
       ),
     );

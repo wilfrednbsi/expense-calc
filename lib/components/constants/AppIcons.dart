@@ -9,5 +9,8 @@ class AppIcons{
   static const String user = '${_iconPath}user.png';
   static const String balance = '${_iconPath}balance.png';
   static const String add = '${_iconPath}add.png';
+  static const String camera = '${_iconPath}camera.png';
+  static const String gallery = '${_iconPath}image.png';
+  static const String dummyProfile = '${_iconPath}image.png';
 
 }

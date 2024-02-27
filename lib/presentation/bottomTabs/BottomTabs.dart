@@ -1,6 +1,12 @@
 import 'package:expense_calc/components/constants/constants.dart';
 import 'package:expense_calc/presentation/home/HomeView.dart';
+import 'package:expense_calc/presentation/plan/PlanView.dart';
+import 'package:expense_calc/presentation/profile/ProfileTabView.dart';
+import 'package:expense_calc/presentation/wallet/WalletView.dart';
+
 import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
+import 'package:expense_calc/viewController/profile/profile_bloc.dart';
+import 'package:expense_calc/viewController/transaction/transaction_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,19 +22,28 @@ class BottomTabs extends StatefulWidget {
 }
 
 class _BottomTabsState extends State<BottomTabs> {
-  final List<Widget> tabs = [const HomeView(),Container(),Container(),Container()];
+
+  final List<Widget> tabs = [const HomeView(),
+    const WalletView(),
+    const PlanView(),
+    const ProfileTabView()];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    final transBloc = context.read<TransactionBloc>();
+    if (transBloc.state is TransactionInitial) {
+      transBloc.add(GetTransactionEvent());
+    }
+    context.read<ProfileBloc>().add(FetchProfileEvent());
+    _changeTab(0);
   }
+
+  void _changeTab(int index) => context.read<BottomTabsBloc>().add(ChangeTab(index: index));
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BottomTabsBloc, BottomTabsState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           body: SafeArea(
@@ -36,8 +51,7 @@ class _BottomTabsState extends State<BottomTabs> {
           ),
           bottomNavigationBar: BottomNavBar(
             activeIndex: state.index,
-            onSelect: (index) =>
-                context.read<BottomTabsBloc>().add(ChangeTab(index: index)),
+            onSelect: _changeTab,
             tabs: bottomTabsList,
           ),
         );
@@ -77,10 +91,7 @@ class BottomNavBar extends StatelessWidget {
                 BottomTabsItem(
                     icon: value ?? '',
                     status: activeIndex == index,
-                    onTap: () {
-                      onSelect(index);
-                      // bookingCtrl.swapBookingFlag.value = false;
-                    })))
+                    onTap: () => onSelect(index))))
             .values
             .toList(),
       ),

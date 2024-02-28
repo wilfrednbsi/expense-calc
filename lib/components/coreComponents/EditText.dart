@@ -19,9 +19,10 @@ class EditText extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
   final Function(String)? onChange;
+  final Function()? onTap;
   final List<TextInputFormatter>? format;
   final TextInputType? inputType;
-  const EditText({super.key, required this.controller, this.readOnly, this.padding, this.margin, this.radius, this.borderColor, this.filledColor, this.isFilled = true, this.hint, this.hintStyle, this.textStyle, this.error,  this.isPassword = false, this.onChange, this.format, this.inputType});
+  const EditText({super.key, required this.controller, this.readOnly, this.padding, this.margin, this.radius, this.borderColor, this.filledColor, this.isFilled = true, this.hint, this.hintStyle, this.textStyle, this.error,  this.isPassword = false, this.onChange, this.format, this.inputType, this.onTap});
 
   @override
   State<EditText> createState() => _EditTextState();
@@ -38,6 +39,7 @@ class _EditTextState extends State<EditText> {
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        onTap: widget.onTap,
         style: widget.textStyle ?? TextStyles.regular14Black,
         decoration: InputDecoration(
           hintText: widget.hint,

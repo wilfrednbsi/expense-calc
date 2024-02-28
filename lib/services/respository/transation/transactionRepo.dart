@@ -1,3 +1,4 @@
+import 'package:expense_calc/model/PlanModel.dart';
 import 'package:expense_calc/model/SummaryModel.dart';
 import 'package:expense_calc/model/TransactionModel.dart';
 import 'package:expense_calc/services/firebaseServices/FirebaseDBService.dart';
@@ -5,9 +6,12 @@ import 'package:expense_calc/services/localData/AppData.dart';
 
 abstract class TransactionRepo {
   Future<bool> addTransaction({required TransactionModel data, required SummaryModel summary});
-
   Future<List<TransactionModel>> getTransactions();
   Future<SummaryModel> getSummary();
+  Future<List<PlanModel>> getPlans();
+
+  Future<String> addNewPlan({required PlanModel data});
+  Future<bool> addAmountToPlan({required PlanModel data, required SummaryModel summary});
 }
 
 class TransactionRepoImplementation extends TransactionRepo {
@@ -61,5 +65,28 @@ class TransactionRepoImplementation extends TransactionRepo {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<String> addNewPlan({required PlanModel data}) async{
+    await Future.delayed(const Duration(seconds: 3));
+    return '';
+  }
+
+  @override
+  Future<List<PlanModel>> getPlans() async{
+    await Future.delayed(const Duration(seconds: 3));
+    return List.generate(10, (index) => PlanModel(
+        plan: 'New Plan',
+      collected: 1000,
+      target: 2000,
+      id:'$index'
+    ));
+  }
+
+  @override
+  Future<bool> addAmountToPlan({required PlanModel data, required SummaryModel summary}) async{
+    await Future.delayed(const Duration(seconds: 3));
+    return true;
   }
 }

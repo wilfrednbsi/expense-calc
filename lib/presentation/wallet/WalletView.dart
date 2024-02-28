@@ -4,9 +4,11 @@ import 'package:expense_calc/components/coreComponents/AppButton.dart';
 import 'package:expense_calc/components/coreComponents/EditText.dart';
 import 'package:expense_calc/components/coreComponents/TextView.dart';
 import 'package:expense_calc/components/widgets/AppBar2.dart';
+import 'package:expense_calc/presentation/plan/AddToPlan.dart';
 import 'package:expense_calc/presentation/wallet/CreateTransaction.dart';
 import 'package:expense_calc/utils/AppExtensions.dart';
 import 'package:expense_calc/utils/DateTimeUtils.dart';
+import 'package:expense_calc/viewController/bottomTabs/bottom_tabs_bloc.dart';
 import 'package:expense_calc/viewController/transaction/transaction_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,9 +93,17 @@ class _WalletViewState extends State<WalletView> {
                             },
                             label: AppStrings.expenses,
                           ),
-                          const AppButton(
+                           AppButton(
+                             onTap: (){
+                               context.pop();
+                               if(tranBloc.planList.isNotEmpty){
+                                 context.pushNavigator(const AddToPlan());
+                               }else{
+                                 context.read<BottomTabsBloc>().add(const ChangeTab(index: 2));
+                               }
+                             },
                             label: AppStrings.addToPlan,
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 top: AppFonts.s16, bottom: AppFonts.s30),
                           ),
                         ],

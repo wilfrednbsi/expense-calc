@@ -70,13 +70,13 @@ class _CreateTransactionState extends State<CreateTransaction> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _editTextHeader(AppStrings.availableBalance),
+              editTextHeader(AppStrings.availableBalance),
               EditText(
                 controller: TextEditingController(text: '${bloc.availableAmount}'),
                 readOnly: true,
                 margin: const EdgeInsets.only(bottom: AppFonts.s20),
               ),
-              _editTextHeader(AppStrings.amount),
+              editTextHeader(AppStrings.amount),
               EditText(
                 controller: amountCtrl,
                 margin: const EdgeInsets.only(bottom: AppFonts.s20),
@@ -87,7 +87,7 @@ class _CreateTransactionState extends State<CreateTransaction> {
                   FilteringTextInputFormatter.digitsOnly
                 ],
               ),
-              _editTextHeader(AppStrings.shortDesc),
+              editTextHeader(AppStrings.shortDesc),
               EditText(
                 controller: descCtrl,
                 margin: const EdgeInsets.only(bottom: AppFonts.s40),
@@ -105,8 +105,10 @@ class _CreateTransactionState extends State<CreateTransaction> {
     ));
   }
 
-  Widget _editTextHeader(String title) => TextView(
-        text: title,
-        textStyle: TextStyles.regular12Black,
-      );
+
 }
+
+Widget editTextHeader(String title) => TextView(
+  text: title,
+  textStyle: TextStyles.regular12Black,
+);

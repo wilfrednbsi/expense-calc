@@ -46,14 +46,4 @@ You can download the apk from the [link](https://drive.google.com/file/d/12GLAEq
 
 
 ## Screen shots
-<img src="login.png" width="240em" height="480em" > 
-<img src="signup.png" width="240em" height="480em" > 
-<img src="home.png" width="240em" height="480em"> 
-<img src="wallet.png" width="240em" height="480em"> 
-<img src="createTransaction.png" width="240em" height="480em">
-<img src="plans.png" width="240em" height="480em" > 
-<img src="addMoneyToPlan.png" width="240em" height="480em" > 
-<img src="profile.png" width="240em" height="480em"> 
-<img src="editProfile.png" width="240em" height="480em"> 
-<img src="changePassword.png" width="240em" height="480em">
-<img src="forgotpassword.png" width="240em" height="480em">
+<img src="login.png" width="240em" height="480em" ><img src="signup.png" width="240em" height="480em" ><img src="home.png" width="240em" height="480em"><img src="wallet.png" width="240em" height="480em"><img src="createTransaction.png" width="240em" height="480em"><img src="plans.png" width="240em" height="480em" ><img src="addMoneyToPlan.png" width="240em" height="480em" ><img src="profile.png" width="240em" height="480em"><img src="editProfile.png" width="240em" height="480em"><img src="changePassword.png" width="240em" height="480em"><img src="forgotpassword.png" width="240em" height="480em">

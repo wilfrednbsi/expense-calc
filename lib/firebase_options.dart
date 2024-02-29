@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC2GY66Z7gbPz6J3UO3nzr2_6DOxvrVPkg',
-    appId: '1:668580703759:android:c8863c9ed36c1c48bd3d7a',
-    messagingSenderId: '668580703759',
+    apiKey: 'YOUR_API_KEY',
+    appId: 'APP_ID',
+    messagingSenderId: 'SENDER_ID',
     projectId: 'my-chat-4ae65',
-    databaseURL: 'https://my-chat-4ae65.firebaseio.com',
-    storageBucket: 'my-chat-4ae65.appspot.com',
+    databaseURL: 'DATABASE_URL',
+    storageBucket: 'BUCKET',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDzIAGptv6LR0z9gsSmfSguh4TIR_-OYn8',
-    appId: '1:668580703759:ios:d48e63257d34215ebd3d7a',
-    messagingSenderId: '668580703759',
-    projectId: 'my-chat-4ae65',
-    databaseURL: 'https://my-chat-4ae65.firebaseio.com',
-    storageBucket: 'my-chat-4ae65.appspot.com',
-    iosBundleId: 'com.app.expenseCalc',
+    apiKey: 'YOUR_API_KEY',
+    appId: 'APP_ID',
+    messagingSenderId: 'SENDER_ID',
+    projectId: 'PROJECT_ID',
+    databaseURL: 'DATABASE_URL',
+    storageBucket: 'BUCKET',
+    iosBundleId: 'BUNDLE_ID',
   );
 }

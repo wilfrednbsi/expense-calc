@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "668580703759",
-    "firebase_url": "https://my-chat-4ae65.firebaseio.com",
-    "project_id": "my-chat-4ae65",
-    "storage_bucket": "my-chat-4ae65.appspot.com"
+    "project_number": "project_number",
+    "firebase_url": "firebase_url",
+    "project_id": "project_id",
+    "storage_bucket": "storage_bucket"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:668580703759:android:c8863c9ed36c1c48bd3d7a",
+        "mobilesdk_app_id": "mobilesdk_app_id",
         "android_client_info": {
-          "package_name": "com.app.expense_calc"
+          "package_name": "android_client_info"
         }
       },
       "oauth_client": [
         {
-          "client_id": "668580703759-jmldr7e8ffns7naoodetlfco5e9a9hk5.apps.googleusercontent.com",
+          "client_id": "client_id",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2GY66Z7gbPz6J3UO3nzr2_6DOxvrVPkg"
+          "current_key": "current_key"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "668580703759-jmldr7e8ffns7naoodetlfco5e9a9hk5.apps.googleusercontent.com",
+              "client_id": "client_id",
               "client_type": 3
             }
           ]

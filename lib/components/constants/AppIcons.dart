@@ -11,6 +11,6 @@ class AppIcons{
   static const String add = '${_iconPath}add.png';
   static const String camera = '${_iconPath}camera.png';
   static const String gallery = '${_iconPath}image.png';
-  static const String dummyProfile = '${_iconPath}image.png';
-
+  static const String dummyProfile = '${_iconPath}userProfile.png';
+  static const String exclamation = '${_iconPath}exclamation.png';
 }

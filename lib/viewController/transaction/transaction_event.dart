@@ -30,3 +30,40 @@ class GetTransactionEvent extends TransactionEvent {
   List<Object?> get props => [];
 }
 
+class AddPlanEvent extends TransactionEvent {
+  final String plan;
+  final String target;
+  final String amount;
+
+  const AddPlanEvent({required this.plan, required this.target, required this.amount});
+
+  @override
+  List<Object?> get props => [plan,target,amount];
+}
+
+class AddAmountToPlanEvent extends TransactionEvent {
+  final String amount;
+  const AddAmountToPlanEvent({required this.amount});
+  @override
+  List<Object?> get props => [amount];
+}
+
+class RefreshEvent extends TransactionEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class ChoosePlanEvent extends TransactionEvent {
+  final PlanModel plan;
+  const ChoosePlanEvent({required this.plan});
+  @override
+  List<Object?> get props => [plan];
+}
+
+class SetTargetPlanEvent extends TransactionEvent {
+  final String target;
+  const SetTargetPlanEvent({required this.target});
+  @override
+  List<Object?> get props => [target];
+}
+

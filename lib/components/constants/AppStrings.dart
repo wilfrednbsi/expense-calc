@@ -48,5 +48,18 @@ class AppStrings {
   static const String amount = "Amount";
   static const String shortDesc = "Short Description";
   static const String noTransactionRecord = "No transaction record!";
+  static const String noPlan = "No plan found!";
+  static const String plan = "Plan";
+  static const String addPlan = "Add Plan";
+  static const String target = "Target";
+  static const String collected = "Collected";
+  static const String chooseYourPlan = "Choose your plan";
+  static const String addAmount = "Add Amount";
+  static const String createNewPlan = "Create New Plan";
+  static const String create = "Create";
+  static const String enterPlanName = "Enter Plan Name";
+  static const String setTarget = "Set Target";
+  static const String initialAmount = "Initial Amount";
+  static const String lastTransactions = "Last Transactions";
 
 }

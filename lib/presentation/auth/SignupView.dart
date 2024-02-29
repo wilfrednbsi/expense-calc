@@ -29,7 +29,6 @@ class _SignupViewState extends State<SignupView> {
         minimum: const EdgeInsets.symmetric(horizontal: AppFonts.s20),
         child: form(
           onSuccess: (){
-            print('register successfully');
             context.pop();
           }
         ),

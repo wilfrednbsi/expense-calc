@@ -118,13 +118,25 @@ class MyPlans extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return ListView.builder(
-          itemBuilder: (context, index) =>
-              _card(
-                  data: bloc.planList[index]),
-          itemCount: bloc.planList.length,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(AppFonts.s16),
+        return SizedBox(
+          child: bloc.planList.isNotEmpty ?
+          ListView.builder(
+            itemBuilder: (context, index) =>
+                _card(
+                    data: bloc.planList[index]),
+            itemCount: bloc.planList.length,
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(AppFonts.s16),
+          ) : const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextView(
+                text: AppStrings.noPlan,
+                textStyle: TextStyles.semiBold20Black,
+              )
+            ],
+          ),
         );
       },
     );

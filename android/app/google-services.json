@@ -1,45 +1,37 @@
 {
   "project_info": {
-    "project_number": "219919410625",
-    "project_id": "gitproject-187fa",
-    "storage_bucket": "gitproject-187fa.appspot.com"
+    "project_number": "668580703759",
+    "firebase_url": "https://my-chat-4ae65.firebaseio.com",
+    "project_id": "my-chat-4ae65",
+    "storage_bucket": "my-chat-4ae65.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:219919410625:android:a9dd71678bd27f8bc57b40",
-        "android_client_info": {
-          "package_name": "com.app.bmi_calculator"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB57OjRNcK5KP4OaHdwM3Vf8tCa-VCZ7XE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:219919410625:android:89e3ac9f7cb4a478c57b40",
+        "mobilesdk_app_id": "1:668580703759:android:c8863c9ed36c1c48bd3d7a",
         "android_client_info": {
           "package_name": "com.app.expense_calc"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "668580703759-jmldr7e8ffns7naoodetlfco5e9a9hk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyB57OjRNcK5KP4OaHdwM3Vf8tCa-VCZ7XE"
+          "current_key": "AIzaSyC2GY66Z7gbPz6J3UO3nzr2_6DOxvrVPkg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668580703759-jmldr7e8ffns7naoodetlfco5e9a9hk5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

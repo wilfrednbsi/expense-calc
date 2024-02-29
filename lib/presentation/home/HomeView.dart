@@ -23,11 +23,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late TransactionBloc tranBloc;
+
   @override
   void initState() {
     super.initState();
     tranBloc = context.read<TransactionBloc>();
   }
+
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -62,10 +64,11 @@ class _HomeViewState extends State<HomeView> {
         },
         builder: (context, state) {
           return  Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const _CardView(),
               const _CategoryView(),
-              TransactionHistoryList(list: tranBloc.getLastTransactions, title: 'Last Transactions',)
+              TransactionHistoryList(list: tranBloc.getLastTransactions, title: AppStrings.lastTransactions,)
             ],
           );
         },

@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCJd_AWBumKh6rWcoUTub0_1BSVqJHbR0g</string>
+	<string>AIzaSyDzIAGptv6LR0z9gsSmfSguh4TIR_-OYn8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>219919410625</string>
+	<string>668580703759</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.app.expenseCalc</string>
 	<key>PROJECT_ID</key>
-	<string>gitproject-187fa</string>
+	<string>my-chat-4ae65</string>
 	<key>STORAGE_BUCKET</key>
-	<string>gitproject-187fa.appspot.com</string>
+	<string>my-chat-4ae65.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:219919410625:ios:c409128a46390dc2c57b40</string>
+	<string>1:668580703759:ios:d48e63257d34215ebd3d7a</string>
+	<key>DATABASE_URL</key>
+	<string>https://my-chat-4ae65.firebaseio.com</string>
 </dict>
 </plist>

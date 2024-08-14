@@ -53,7 +53,6 @@ class _ChangePasswordState extends State<ChangePassword> {
         ),
       ),
     );
-    ;
   }
 
   Widget mainForm({required BuildContext context}) {

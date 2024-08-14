@@ -11,13 +11,11 @@ class OnChangeEvent extends ChangePasswordEvent {
 
   const OnChangeEvent({required this.oldPassword, required this.newPassword, required this.confirmPassword});
   @override
-  // TODO: implement props
   List<Object?> get props => [oldPassword,newPassword,confirmPassword];
 }
 
 class ClearFormErrorEvent extends ChangePasswordEvent {
   const ClearFormErrorEvent();
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }

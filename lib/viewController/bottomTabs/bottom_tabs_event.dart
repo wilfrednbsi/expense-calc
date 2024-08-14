@@ -10,6 +10,5 @@ class ChangeTab extends BottomTabsEvent{
   const ChangeTab({required this.index});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [index];
 }

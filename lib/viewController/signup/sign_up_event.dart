@@ -12,6 +12,5 @@ abstract class SignUpEvent extends Equatable {
   const SignupRegisterEvent({required this.email, required this.password, required this.confirmPassword});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [email,password,confirmPassword];
 }

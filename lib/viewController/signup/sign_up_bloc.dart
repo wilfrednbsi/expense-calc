@@ -12,7 +12,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final repo = AuthRepoImplementation();
   SignUpBloc() : super(SignUpInitial()) {
     on<SignUpEvent>((event, emit) {
-      // TODO: implement event handler
     });
     on<SignupRegisterEvent>(_registerAction);
   }

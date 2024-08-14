@@ -9,11 +9,11 @@ appDialog(BuildContext context, Widget child) {
       useSafeArea: true,
       builder: (_) => AnimateDialog(
         childView: AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(AppFonts.s16))),
           backgroundColor: AppColors.white,
-          insetPadding: EdgeInsets.symmetric(horizontal: AppFonts.s16, vertical: AppFonts.s40),
-          content: Container(
+          insetPadding: const EdgeInsets.symmetric(horizontal: AppFonts.s16, vertical: AppFonts.s40),
+          content: SizedBox(
               width: double.maxFinite,
               child: child),
         ),

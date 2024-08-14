@@ -9,7 +9,6 @@ part 'bottom_tabs_state.dart';
 class BottomTabsBloc extends Bloc<BottomTabsEvent, BottomTabsState> {
   BottomTabsBloc() : super(const BottomTabsState(index: 0)) {
     on<BottomTabsEvent>((event, emit) {
-      // TODO: implement event handler
     });
     on<ChangeTab>(_onChangeTab);
   }

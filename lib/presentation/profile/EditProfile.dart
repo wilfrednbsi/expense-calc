@@ -3,14 +3,14 @@ import 'package:expense_calc/components/constants/AppStrings.dart';
 import 'package:expense_calc/components/coreComponents/AppButton.dart';
 import 'package:expense_calc/components/coreComponents/EditText.dart';
 import 'package:expense_calc/components/widgets/AppBar2.dart';
-import 'package:expense_calc/components/widgets/dialog/FailureMessageDialog.dart';
+// import 'package:expense_calc/components/widgets/dialog/FailureMessageDialog.dart';
 import 'package:expense_calc/utils/AppExtensions.dart';
 import 'package:expense_calc/viewController/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/constants/TextStyles.dart';
-import '../../components/constants/constants.dart';
+// import '../../components/constants/constants.dart';
 import '../../components/widgets/EditProfileImage.dart';
 import '../../model/ImageDataModel.dart';
 

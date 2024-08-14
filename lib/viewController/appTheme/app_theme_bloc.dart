@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:expense_calc/components/constants/AppTheme.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+// import 'package:meta/meta.dart';
 
 part 'app_theme_event.dart';
 part 'app_theme_state.dart';

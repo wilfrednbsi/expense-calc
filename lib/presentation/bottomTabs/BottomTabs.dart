@@ -89,7 +89,7 @@ class BottomNavBar extends StatelessWidget {
             .map((index, value) => MapEntry(
                 index,
                 BottomTabsItem(
-                    icon: value ?? '',
+                    icon: value, //?? '',
                     status: activeIndex == index,
                     onTap: () => onSelect(index))))
             .values
